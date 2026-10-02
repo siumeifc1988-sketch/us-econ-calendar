@@ -1,86 +1,63 @@
 import re, requests
-from datetime import datetime, timedelta, timezone
-try:
-    from bs4 import BeautifulSoup
-    HAS_BS=True
-except:
-    HAS_BS=False
+from datetime import datetime, timezone
 
-def fetch(url):
-    headers={"User-Agent":"Mozilla/5.0","Referer":"https://www.bls.gov/"}
+def fetch_real(url):
+    h={"User-Agent":"Mozilla/5.0 (compatible; US-Econ-Calendar/1.0; +https://siumeifc1988-sketch.github.io/us-econ-calendar/)","Accept":"text/calendar, text/plain, */*"}
+    # 直連
     try:
-        r=requests.get(url, headers=headers, timeout=20)
-        if r.status_code==200 and len(r.text)>1000:
-            return r.text
+        r=requests.get(url, headers=h, timeout=20)
+        if r.status_code==200 and len(r.text)>1000: return r.text
     except: pass
-    for tmpl in ["https://api.allorigins.win/raw?url={url}","https://api.codetabs.com/v1/proxy?quest={url}"]:
+    # 中文版都係靠呢個代理過BLS封鎖
+    for p in [f"https://api.allorigins.win/raw?url={url}", f"https://api.codetabs.com/v1/proxy?quest={url}"]:
         try:
-            r=requests.get(tmpl.format(url=url), headers=headers, timeout=20)
+            r=requests.get(p, headers=h, timeout=20)
             if r.status_code==200 and len(r.text)>1000:
-                print(f"代理成功 {url[-15:]}")
+                print(f"代理真實成功 {url.split('/')[-1]}")
                 return r.text
         except: pass
-    return ""
+    raise Exception(f"真實抓失敗 {url}")
 
-def parse_bls(html, label):
-    out=[]
-    if not html: return out
-    # 抓所有 Oct. 12, 2025 呢類日期
-    for m in re.finditer(r"([A-Z][a-z]{2,}\.?\s+\d{1,2},\s+\d{4})", html):
-        try:
-            d=datetime.strptime(m.group(1).replace(".",""), "%b %d, %Y")
-        except:
-            try: d=datetime.strptime(m.group(1).replace(".",""), "%B %d, %Y")
-            except: continue
-        if d.replace(tzinfo=None) < datetime.now()-timedelta(days=1): continue
-        # 淨係要未來一年
-        if d.year > datetime.now().year+1: continue
-        out.append((d,label))
-    return out
+def parse_ics(ics_text, keywords):
+    # 最簡單iCal解析，只留你想要嘅
+    events=[]
+    for block in re.findall(r"BEGIN:VEVENT(.*?)END:VEVENT", ics_text, re.S):
+        summ=re.search(r"SUMMARY:(.+)", block)
+        if not summ: continue
+        title=summ.group(1)
+        if not any(k.lower() in title.lower() for k in keywords): continue
+        # 保留原block，但統一加提醒
+        if "VALARM" not in block:
+            block+= "\r\nBEGIN:VALARM\r\nTRIGGER:-P1D\r\nACTION:DISPLAY\r\nEND:VALARM\r\nBEGIN:VALARM\r\nTRIGGER:-PT60M\r\nACTION:DISPLAY\r\nEND:VALARM"
+        events.append(f"BEGIN:VEVENT{block}END:VEVENT")
+    return events
 
-events=[]
-stamp=datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-all_dates=[]
+all_events=[]
 
-for url,label in [("https://www.bls.gov/schedule/news_release/empsit.htm","非農"),("https://www.bls.gov/schedule/news_release/cpi.htm","CPI")]:
-    all_dates+=parse_bls(fetch(url), label)
+# 1. BLS 官方 bls.ics - 入面就有 CPI + 非農
+bls_ics=fetch_real("https://www.bls.gov/schedule/news_release/bls.ics")
+all_events+=parse_ics(bls_ics, ["Consumer Price Index", "Employment Situation", "CPI", "Employment"])
 
-# FOMC
-html=fetch("https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm")
-if html:
-    for m in re.finditer(r"(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2})(?:-(\d{1,2}))?\s*,?\s*(\d{4})", html):
-        try:
-            mon={"January":1,"February":2,"March":3,"April":4,"May":5,"June":6,"July":7,"August":8,"September":9,"October":10,"November":11,"December":12}[m.group(1)]
-            day=int(m.group(3) or m.group(2)); y=int(m.group(4))
-            d=datetime(y,mon,day)
-            if d.replace(tzinfo=None) < datetime.now(): continue
-            all_dates.append((d,"FOMC"))
-        except: pass
+# 2. BEA 官方 - GDP/PCE (中文版都有)
+try:
+    bea_ics=fetch_real("https://www.bea.gov/news/schedule/ics/online-calendar-subscription.ics")
+    all_events+=parse_ics(bea_ics, ["GDP", "Personal Income", "PCE"])
+except Exception as e:
+    print(f"BEA skip {e}")
 
-# 轉做 VEVENT
-for d,label in all_dates:
-    if label=="FOMC": dt=d.strftime("%Y%m%dT140000")
-    else: dt=d.strftime("%Y%m%dT083000")
-    events.append(f"BEGIN:VEVENT\r\nDTSTART;TZID=US-Eastern:{dt}\r\nDTSTAMP:{stamp}\r\nSUMMARY:{label} {d.month}/{d.day}\r\nUID:{label}-{dt}\r\nBEGIN:VALARM\r\nTRIGGER:-P1D\r\nEND:VALARM\r\nBEGIN:VALARM\r\nTRIGGER:-PT60M\r\nEND:VALARM\r\nEND:VEVENT")
+# 3. FOMC 真實
+html=fetch_real("https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm")
+for m in re.finditer(r"(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2})(?:-\d{1,2})?,?\s+(\d{4})", html):
+    mon={"January":1,"February":2,"March":3,"April":4,"May":5,"June":6,"July":7,"August":8,"September":9,"October":10,"November":11,"December":12}[m.group(1)]
+    d=datetime(int(m.group(3)),mon,int(m.group(2)), tzinfo=timezone.utc)
+    if d < datetime.now(timezone.utc): continue
+    dt=d.strftime("%Y%m%dT140000")
+    stamp=datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    all_events.append(f"BEGIN:VEVENT\r\nDTSTART;TZID=US-Eastern:{dt}\r\nDTSTAMP:{stamp}\r\nSUMMARY:FOMC {mon}/{d.day}\r\nUID:FOMC-{dt}@fed.gov\r\nBEGIN:VALARM\r\nTRIGGER:-P1D\r\nEND:VALARM\r\nBEGIN:VALARM\r\nTRIGGER:-PT60M\r\nEND:VALARM\r\nEND:VEVENT")
 
-# 保底：咩都抓唔到都三樣齊
-if len([e for e in events if "CPI" in e])<3:
-    for k in range(6):
-        now=datetime.now()
-        y=now.year+(now.month-1+k)//12; m=(now.month-1+k)%12+1
-        d=datetime(y,m,12) # CPI 固定12號前後
-        if d<now: continue
-        dt=d.strftime("%Y%m%dT083000")
-        events.append(f"BEGIN:VEVENT\r\nDTSTART;TZID=US-Eastern:{dt}\r\nDTSTAMP:{stamp}\r\nSUMMARY:CPI {m}/{d.day} (保底)\r\nUID:CPI-{dt}\r\nEND:VEVENT")
+if len(all_events)<8: raise Exception(f"真實抓太少 {len(all_events)}")
 
-if len([e for e in events if "FOMC" in e])<3:
-    fomc_fallback=[(2026,1,28),(2026,3,18),(2026,4,29),(2026,6,17),(2026,7,29),(2026,9,16),(2026,10,28),(2026,12,9)]
-    for y,m,d in fomc_fallback:
-        dd=datetime(y,m,d)
-        if dd<datetime.now(): continue
-        dt=dd.strftime("%Y%m%dT140000")
-        events.append(f"BEGIN:VEVENT\r\nDTSTART;TZID=US-Eastern:{dt}\r\nDTSTAMP:{stamp}\r\nSUMMARY:FOMC {m}/{d} (保底)\r\nUID:FOMC-{dt}\r\nEND:VEVENT")
+ics="BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//real-bls.ics-copy//\r\nX-WR-CALNAME:美股-CPI非農議息\r\nBEGIN:VTIMEZONE\r\nTZID:US-Eastern\r\nBEGIN:DAYLIGHT\r\nTZOFFSETFROM:-0500\r\nTZOFFSETTO:-0400\r\nDTSTART:20070311T020000\r\nRRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU\r\nEND:DAYLIGHT\r\nBEGIN:STANDARD\r\nTZOFFSETFROM:-0400\r\nTZOFFSETTO:-0500\r\nDTSTART:20071104T020000\r\nRRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU\r\nEND:STANDARD\r\nEND:VTIMEZONE\r\n" + "\r\n".join(all_events) + "\r\nEND:VCALENDAR"
 
-ics="BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//full-auto//\r\nX-WR-CALNAME:美股-CPI非農議息\r\nBEGIN:VTIMEZONE\r\nTZID:US-Eastern\r\nBEGIN:DAYLIGHT\r\nTZOFFSETFROM:-0500\r\nTZOFFSETTO:-0400\r\nDTSTART:20070311T020000\r\nRRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU\r\nEND:DAYLIGHT\r\nBEGIN:STANDARD\r\nTZOFFSETFROM:-0400\r\nTZOFFSETTO:-0500\r\nDTSTART:20071104T020000\r\nRRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU\r\nEND:STANDARD\r\nEND:VTIMEZONE\r\n"+"\r\n".join(events)+"\r\nEND:VCALENDAR"
 open("us.ics","w",encoding="utf-8").write(ics)
-print(f"done 非農:{len([e for e in events if '非農' in e])} CPI:{len([e for e in events if 'CPI' in e])} FOMC:{len([e for e in events if 'FOMC' in e])}")
+print(f"真實完成 {len(all_events)} 個，全部來自 bls.ics + fed")
