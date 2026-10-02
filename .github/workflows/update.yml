@@ -1,0 +1,21 @@
+name: update  # 個名隨便改
+on:
+  schedule:
+    - cron: "0 0 * * *"  # 每日 UTC 0點 = 香港朝早8點自動跑一次
+  workflow_dispatch:  # 加呢行，你就可以手動按掣即刻跑，唔使等聽日
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # 用美國機跑，所以先過到 BLS 個 Akamai
+    permissions:
+      contents: write  # 一定要有，唔係佢冇權限幫你 push 個 us.ics
+    steps:
+      - uses: actions/checkout@v4  # 拎你個 repo 出嚟
+      - run: pip install requests
+      - run: python generate.py  # 跑 Python 生成 us.ics
+      - run: |
+          git config user.name bot
+          git config user.email bot@github.com
+          git add us.ics
+          git commit -m "update" || true
+          git push  # 推返上 GitHub
