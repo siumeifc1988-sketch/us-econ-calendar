@@ -24,7 +24,6 @@ jobs:
           import urllib.request
           import re
           from bs4 import BeautifulSoup
-          from datetime import datetime
           from googletrans import Translator
 
           translator = Translator()
@@ -90,7 +89,7 @@ jobs:
               print('Error fetch BLS:', e)
 
           # ==========================================
-          # 2. 自動爬取 Fed 官網 FOMC 最新會議日程 (全自動更新)
+          # 2. 自動爬取 Fed 官網 FOMC 最新會議日程
           # ==========================================
           fomc_url = 'https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm'
           month_lookup = {
@@ -103,7 +102,6 @@ jobs:
               html_content = urllib.request.urlopen(req).read().decode('utf-8')
               soup = BeautifulSoup(html_content, 'html.parser')
 
-              # 尋找所有年度 Panel (例如 2025, 2026, 2027...)
               panels = soup.find_all('div', class_='panel')
               for panel in panels:
                   heading = panel.find('h4')
@@ -114,7 +112,6 @@ jobs:
                       continue
                   year = int(year_match.group(0))
 
-                  # 尋找該年份表格中的會議列
                   rows = panel.find_all('div', class_='fomc-meeting')
                   for row in rows:
                       month_div = row.find('div', class_='fomc-meeting__month')
@@ -125,15 +122,12 @@ jobs:
                       month_str = month_div.text.strip()
                       date_str = date_div.text.strip()
 
-                      # 判斷是否包含 SEP / 點陣圖 (*)
                       has_sep = '*' in date_str or 'SEP' in date_str
                       
-                      # 擷取日期數字 (例如 27-28 或 28)
                       days = re.findall(r'\d+', date_str)
                       if not days:
                           continue
 
-                      # 分析月份 (例如 Jan/Feb 轉為第一個月份)
                       m_match = re.search(r'(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)', month_str)
                       if not m_match:
                           continue
@@ -143,16 +137,17 @@ jobs:
                       end_day = int(days[-1]) if len(days) > 1 else start_day
 
                       start_date_str = f'{year}{m_num:02d}{start_day:02d}'
-                      end_date_str = f'{year}{m_num:02d}{end_day:02d}'
+                      end_day_calc = end_day + 1
+                      end_date_str = f'{year}{m_num:02d}{end_day_calc:02d}'
 
                       title = 'FOMC 利率決策會議 (含SEP/點陣圖)' if has_sep else 'FOMC 利率決策會議'
                       desc = f'美國聯準會（Fed）貨幣政策會議，決議基準利率。\\n會議日期：{year}年{month_str} {date_str}\\n詳情與官方聲明：https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm'
 
-                      fomc_ev = f'''BEGIN:VEVENT
-  DTSTART;VALUE=DATE:{start_date_str}
-  DTEND;VALUE=DATE:{end_date_str}
-  SUMMARY:{title}
-  DESCRIPTION:{desc}
+                      fomc_ev = '''BEGIN:VEVENT
+  DTSTART;VALUE=DATE:''' + start_date_str + '''
+  DTEND;VALUE=DATE:''' + end_date_str + '''
+  SUMMARY:''' + title + '''
+  DESCRIPTION:''' + desc + '''
   URL:https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
   END:VEVENT'''
                       events.append(fomc_ev)
