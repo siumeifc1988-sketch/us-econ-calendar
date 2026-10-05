@@ -16,22 +16,25 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install requests googletrans==4.0.0-rc1 legacy-cgi
+        run: pip install requests googletrans==4.0.0-rc1 legacy-cgi beautifulsoup4
 
       - name: Download, Format and Combine ICS
         run: |
           python -c "
           import urllib.request
           import re
+          from bs4 import BeautifulSoup
+          from datetime import datetime
           from googletrans import Translator
 
           translator = Translator()
-
-          # --- 1. 處理 BLS 日曆 ---
-          bls_url = 'https://r.jina.ai/https://www.bls.gov/schedule/news_release/bls.ics'
+          events = []
           headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
-          
-          # 通用縮寫與簡短名稱映射表
+
+          # ==========================================
+          # 1. 抓取與處理 BLS 日曆
+          # ==========================================
+          bls_url = 'https://r.jina.ai/https://www.bls.gov/schedule/news_release/bls.ics'
           dict_map = {
               'Consumer Price Index': 'CPI 物價指數',
               'Producer Price Index': 'PPI 生產者物價',
@@ -41,8 +44,6 @@ jobs:
               'Productivity and Costs': '生產力與成本',
               'Occupational Employment and Wages': '職業薪資調查'
           }
-
-          # 核心指標簡介與官方/詳細連結映射
           desc_map = {
               'CPI 物價指數': '美國消費者物價指數（CPI），為衡量通膨的核心指標。\\n詳情與報告：https://www.bls.gov/cpi/',
               'PPI 生產者物價': '美國生產者物價指數（PPI），反映生產端批發價格變動。\\n詳情與報告：https://www.bls.gov/ppi/',
@@ -52,17 +53,14 @@ jobs:
               '生產力與成本': '企業生產效率與單位勞工成本變動。\\n詳情與報告：https://www.bls.gov/lpc/'
           }
 
-          events = []
           try:
               req = urllib.request.Request(bls_url, headers=headers)
               raw_data = urllib.request.urlopen(req).read().decode('utf-8')
               ics_start = raw_data.find('BEGIN:VCALENDAR')
               content = raw_data[ics_start:] if ics_start != -1 else raw_data
 
-              # 擷取每一個 VEVENT
               raw_events = re.findall(r'BEGIN:VEVENT.*?END:VEVENT', content, re.DOTALL)
               for ev in raw_events:
-                  # 替換 Summary 為精簡中文標題
                   summary_match = re.search(r'SUMMARY:(.*)', ev)
                   short_title = ''
                   if summary_match:
@@ -79,7 +77,6 @@ jobs:
                               pass
                       ev = re.sub(r'SUMMARY:.*', f'SUMMARY:{short_title}', ev)
 
-                  # 加入 Description 簡介與連結
                   desc_text = desc_map.get(short_title, f'{short_title} 數據發佈。\\n官方網址：https://www.bls.gov/schedule/news_release/')
                   clean_desc = desc_text.replace('\n', '\\n')
                   
@@ -92,29 +89,80 @@ jobs:
           except Exception as e:
               print('Error fetch BLS:', e)
 
-          # --- 2. 加入 FOMC 聯準會會議日程 (2026) ---
-          fomc_dates = [
-              ('20260127', '20260128', 'FOMC 利率決策會議', '美國聯準會（Fed）貨幣政策會議，決議基準利率。次日（28日）美東時間下午2:00發佈聲明與主席記者會。\\n詳情：https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm'),
-              ('20260317', '20260318', 'FOMC 利率決策會議 (含SEP)', '含經濟預測摘要 (SEP) 與點陣圖。\\n詳情：https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm'),
-              ('20260428', '20260429', 'FOMC 利率決策會議', '美國聯準會貨幣政策會議。\\n詳情：https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm'),
-              ('20260616', '20260617', 'FOMC 利率決策會議 (含SEP)', '含經濟預測摘要 (SEP) 與點陣圖。\\n詳情：https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm'),
-              ('20260728', '20260729', 'FOMC 利率決策會議', '美國聯準會貨幣政策會議。\\n詳情：https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm'),
-              ('20260915', '20260916', 'FOMC 利率決策會議 (含SEP)', '含經濟預測摘要 (SEP) 與點陣圖。\\n詳情：https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm'),
-              ('20261027', '20261028', 'FOMC 利率決策會議', '美國聯準會貨幣政策會議。\\n詳情：https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm'),
-              ('20261208', '20261209', 'FOMC 利率決策會議 (含SEP)', '含經濟預測摘要 (SEP) 與點陣圖。\\n詳情：https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm')
-          ]
+          # ==========================================
+          # 2. 自動爬取 Fed 官網 FOMC 最新會議日程 (全自動更新)
+          # ==========================================
+          fomc_url = 'https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm'
+          month_lookup = {
+              'Jan': 1, 'Feb': 2, 'Mar': 3, 'Apr': 4, 'May': 5, 'Jun': 6,
+              'Jul': 7, 'Aug': 8, 'Sep': 9, 'Oct': 10, 'Nov': 11, 'Dec': 12
+          }
 
-          for start, end, title, desc in fomc_dates:
-              fomc_ev = f'''BEGIN:VEVENT
-  DTSTART;VALUE=DATE:{start}
-  DTEND;VALUE=DATE:{end}
+          try:
+              req = urllib.request.Request(fomc_url, headers=headers)
+              html_content = urllib.request.urlopen(req).read().decode('utf-8')
+              soup = BeautifulSoup(html_content, 'html.parser')
+
+              # 尋找所有年度 Panel (例如 2025, 2026, 2027...)
+              panels = soup.find_all('div', class_='panel')
+              for panel in panels:
+                  heading = panel.find('h4')
+                  if not heading:
+                      continue
+                  year_match = re.search(r'20\d{2}', heading.text)
+                  if not year_match:
+                      continue
+                  year = int(year_match.group(0))
+
+                  # 尋找該年份表格中的會議列
+                  rows = panel.find_all('div', class_='fomc-meeting')
+                  for row in rows:
+                      month_div = row.find('div', class_='fomc-meeting__month')
+                      date_div = row.find('div', class_='fomc-meeting__date')
+                      if not month_div or not date_div:
+                          continue
+
+                      month_str = month_div.text.strip()
+                      date_str = date_div.text.strip()
+
+                      # 判斷是否包含 SEP / 點陣圖 (*)
+                      has_sep = '*' in date_str or 'SEP' in date_str
+                      
+                      # 擷取日期數字 (例如 27-28 或 28)
+                      days = re.findall(r'\d+', date_str)
+                      if not days:
+                          continue
+
+                      # 分析月份 (例如 Jan/Feb 轉為第一個月份)
+                      m_match = re.search(r'(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)', month_str)
+                      if not m_match:
+                          continue
+                      m_num = month_lookup[m_match.group(1)]
+
+                      start_day = int(days[0])
+                      end_day = int(days[-1]) if len(days) > 1 else start_day
+
+                      start_date_str = f'{year}{m_num:02d}{start_day:02d}'
+                      end_date_str = f'{year}{m_num:02d}{end_day:02d}'
+
+                      title = 'FOMC 利率決策會議 (含SEP/點陣圖)' if has_sep else 'FOMC 利率決策會議'
+                      desc = f'美國聯準會（Fed）貨幣政策會議，決議基準利率。\\n會議日期：{year}年{month_str} {date_str}\\n詳情與官方聲明：https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm'
+
+                      fomc_ev = f'''BEGIN:VEVENT
+  DTSTART;VALUE=DATE:{start_date_str}
+  DTEND;VALUE=DATE:{end_date_str}
   SUMMARY:{title}
   DESCRIPTION:{desc}
   URL:https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
   END:VEVENT'''
-              events.append(fomc_ev)
+                      events.append(fomc_ev)
+              print('Successfully scraped FOMC calendar.')
+          except Exception as e:
+              print('Error scraping FOMC calendar:', e)
 
-          # --- 3. 組裝終端 ICS 文件 ---
+          # ==========================================
+          # 3. 組裝終端 ICS 文件
+          # ==========================================
           ics_output = '''BEGIN:VCALENDAR
   VERSION:2.0
   PRODID:-//US Econ Calendar Chinese//EN
@@ -125,7 +173,7 @@ jobs:
 
           with open('bls_zh.ics', 'w', encoding='utf-8') as f:
               f.write(ics_output)
-          print('Successfully generated combined calendar.')
+          print('Successfully updated combined calendar.')
           "
 
       - name: Commit and push
@@ -133,5 +181,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add bls_zh.ics
-          git commit -m "Update translated BLS and FOMC calendar" || exit 0
+          git commit -m "Auto update BLS and FOMC calendar" || exit 0
           git push
