@@ -1,7 +1,7 @@
-name: Sync & Translate BLS Calendar
+name: Sync & Translate BLS & FOMC Calendar
 on:
   schedule:
-    - cron: '0 0 * * *' # 每天自動執行
+    - cron: '0 0 * * *' # 每天 UTC 00:00 自動執行
   workflow_dispatch:
 
 jobs:
@@ -18,62 +18,114 @@ jobs:
       - name: Install dependencies
         run: pip install requests googletrans==4.0.0-rc1 legacy-cgi
 
-      - name: Download and Translate ICS
+      - name: Download, Format and Combine ICS
         run: |
           python -c "
           import urllib.request
           import re
           from googletrans import Translator
 
-          # 使用 Jina AI Reader 免費代理繞過 BLS 的 403 封鎖
-          url = 'https://r.jina.ai/https://www.bls.gov/schedule/news_release/bls.ics'
-          headers = {
-              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+          translator = Translator()
+
+          # --- 1. 處理 BLS 日曆 ---
+          bls_url = 'https://r.jina.ai/https://www.bls.gov/schedule/news_release/bls.ics'
+          headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
+          
+          # 通用縮寫與簡短名稱映射表
+          dict_map = {
+              'Consumer Price Index': 'CPI 物價指數',
+              'Producer Price Index': 'PPI 生產者物價',
+              'Employment Situation': '非農就業 / 失業率',
+              'Real Earnings': '實際薪資收益',
+              'U.S. Import and Export Price Indexes': '進出口物價',
+              'Productivity and Costs': '生產力與成本',
+              'Occupational Employment and Wages': '職業薪資調查'
           }
-          
-          req = urllib.request.Request(url, headers=headers)
-          
+
+          # 核心指標簡介與官方/詳細連結映射
+          desc_map = {
+              'CPI 物價指數': '美國消費者物價指數（CPI），為衡量通膨的核心指標。\\n詳情與報告：https://www.bls.gov/cpi/',
+              'PPI 生產者物價': '美國生產者物價指數（PPI），反映生產端批發價格變動。\\n詳情與報告：https://www.bls.gov/ppi/',
+              '非農就業 / 失業率': '包含非農就業人口變動、失業率及平均時薪，為聯準會利率決策關鍵數據。\\n詳情與報告：https://www.bls.gov/news.release/empsit.toc.htm',
+              '實際薪資收益': '考量通膨後的實質薪資成長狀況。\\n詳情與報告：https://www.bls.gov/news.release/realer.toc.htm',
+              '進出口物價': '衡量美國進口與出口商品及服務價格變動。\\n詳情與報告：https://www.bls.gov/mxp/',
+              '生產力與成本': '企業生產效率與單位勞工成本變動。\\n詳情與報告：https://www.bls.gov/lpc/'
+          }
+
+          events = []
           try:
+              req = urllib.request.Request(bls_url, headers=headers)
               raw_data = urllib.request.urlopen(req).read().decode('utf-8')
-              
-              # 清除代理服務附帶的標頭資訊，保留純 ics 內容
               ics_start = raw_data.find('BEGIN:VCALENDAR')
-              if ics_start != -1:
-                  content = raw_data[ics_start:]
-              else:
-                  content = raw_data
+              content = raw_data[ics_start:] if ics_start != -1 else raw_data
 
-              translator = Translator()
-              
-              dict_map = {
-                  'Consumer Price Index': '消費者物價指數 (CPI)',
-                  'Producer Price Index': '生產者物價指數 (PPI)',
-                  'Employment Situation': '非農就業報告 / 失業率',
-                  'Real Earnings': '實際轉項收益',
-                  'U.S. Import and Export Price Indexes': '進出口物價指數',
-                  'Productivity and Costs': '生產力與成本',
-                  'Occupational Employment and Wages': '職業就業與工資'
-              }
+              # 擷取每一個 VEVENT
+              raw_events = re.findall(r'BEGIN:VEVENT.*?END:VEVENT', content, re.DOTALL)
+              for ev in raw_events:
+                  # 替換 Summary 為精簡中文標題
+                  summary_match = re.search(r'SUMMARY:(.*)', ev)
+                  short_title = ''
+                  if summary_match:
+                      orig_text = summary_match.group(1).strip()
+                      short_title = orig_text
+                      for en, zh in dict_map.items():
+                          if en in orig_text:
+                              short_title = zh
+                              break
+                      if short_title == orig_text:
+                          try:
+                              short_title = translator.translate(orig_text, dest='zh-tw').text
+                          except:
+                              pass
+                      ev = re.sub(r'SUMMARY:.*', f'SUMMARY:{short_title}', ev)
 
-              def replace_summary(match):
-                  text = match.group(1)
-                  for en, zh in dict_map.items():
-                      if en in text:
-                          return f'SUMMARY:{zh}'
-                  try:
-                      res = translator.translate(text, dest='zh-tw').text
-                      return f'SUMMARY:{res}'
-                  except Exception:
-                      return f'SUMMARY:{text}'
+                  # 加入 Description 簡介與連結
+                  desc_text = desc_map.get(short_title, f'{short_title} 數據發佈。\\n官方網址：https://www.bls.gov/schedule/news_release/')
+                  clean_desc = desc_text.replace('\n', '\\n')
+                  
+                  if 'DESCRIPTION:' in ev:
+                      ev = re.sub(r'DESCRIPTION:.*', f'DESCRIPTION:{clean_desc}', ev)
+                  else:
+                      ev = ev.replace('END:VEVENT', f'DESCRIPTION:{clean_desc}\nEND:VEVENT')
 
-              translated = re.sub(r'SUMMARY:(.*)', replace_summary, content)
-              
-              with open('bls_zh.ics', 'w', encoding='utf-8') as f:
-                  f.write(translated)
-              print('Successfully downloaded and translated BLS calendar.')
+                  events.append(ev)
           except Exception as e:
-              print('Error downloading BLS calendar:', e)
-              raise e
+              print('Error fetch BLS:', e)
+
+          # --- 2. 加入 FOMC 聯準會會議日程 (2026) ---
+          fomc_dates = [
+              ('20260127', '20260128', 'FOMC 利率決策會議', '美國聯準會（Fed）貨幣政策會議，決議基準利率。次日（28日）美東時間下午2:00發佈聲明與主席記者會。\\n詳情：https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm'),
+              ('20260317', '20260318', 'FOMC 利率決策會議 (含SEP)', '含經濟預測摘要 (SEP) 與點陣圖。\\n詳情：https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm'),
+              ('20260428', '20260429', 'FOMC 利率決策會議', '美國聯準會貨幣政策會議。\\n詳情：https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm'),
+              ('20260616', '20260617', 'FOMC 利率決策會議 (含SEP)', '含經濟預測摘要 (SEP) 與點陣圖。\\n詳情：https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm'),
+              ('20260728', '20260729', 'FOMC 利率決策會議', '美國聯準會貨幣政策會議。\\n詳情：https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm'),
+              ('20260915', '20260916', 'FOMC 利率決策會議 (含SEP)', '含經濟預測摘要 (SEP) 與點陣圖。\\n詳情：https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm'),
+              ('20261027', '20261028', 'FOMC 利率決策會議', '美國聯準會貨幣政策會議。\\n詳情：https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm'),
+              ('20261208', '20261209', 'FOMC 利率決策會議 (含SEP)', '含經濟預測摘要 (SEP) 與點陣圖。\\n詳情：https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm')
+          ]
+
+          for start, end, title, desc in fomc_dates:
+              fomc_ev = f'''BEGIN:VEVENT
+  DTSTART;VALUE=DATE:{start}
+  DTEND;VALUE=DATE:{end}
+  SUMMARY:{title}
+  DESCRIPTION:{desc}
+  URL:https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+  END:VEVENT'''
+              events.append(fomc_ev)
+
+          # --- 3. 組裝終端 ICS 文件 ---
+          ics_output = '''BEGIN:VCALENDAR
+  VERSION:2.0
+  PRODID:-//US Econ Calendar Chinese//EN
+  CALSCALE:GREGORIAN
+  X-WR-CALNAME:美聯儲與BLS經濟日曆
+  X-WR-TIMEZONE:Asia/Hong_Kong
+  ''' + '\n'.join(events) + '\nEND:VCALENDAR'
+
+          with open('bls_zh.ics', 'w', encoding='utf-8') as f:
+              f.write(ics_output)
+          print('Successfully generated combined calendar.')
           "
 
       - name: Commit and push
@@ -81,5 +133,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add bls_zh.ics
-          git commit -m "Update translated BLS calendar" || exit 0
+          git commit -m "Update translated BLS and FOMC calendar" || exit 0
           git push
