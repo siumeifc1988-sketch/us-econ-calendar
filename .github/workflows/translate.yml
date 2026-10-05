@@ -1,0 +1,80 @@
+name: Sync & Translate BLS Calendar
+on:
+  schedule:
+    - cron: '0 0 * * *' # 每天自動執行
+  workflow_dispatch:
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests googletrans==4.0.0-rc1
+
+      - name: Download and Translate ICS
+        run: |
+          python -c "
+          import urllib.request
+          import re
+          from googletrans import Translator
+
+          url = 'https://www.bls.gov/schedule/news_release/bls.ics'
+          
+          # 偽裝成真實 Chrome 瀏覽器以繞過 BLS 防火牆阻擋
+          headers = {
+              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+              'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+          }
+          
+          req = urllib.request.Request(url, headers=headers)
+          
+          try:
+              content = urllib.request.urlopen(req).read().decode('utf-8')
+              translator = Translator()
+              
+              # 常見 BLS 核心經濟指標對照表
+              dict_map = {
+                  'Consumer Price Index': '消費者物價指數 (CPI)',
+                  'Producer Price Index': '生產者物價指數 (PPI)',
+                  'Employment Situation': '非農就業報告 / 失業率',
+                  'Real Earnings': '實際轉項收益',
+                  'U.S. Import and Export Price Indexes': '進出口物價指數',
+                  'Productivity and Costs': '生產力與成本',
+                  'Occupational Employment and Wages': '職業就業與工資'
+              }
+
+              def replace_summary(match):
+                  text = match.group(1)
+                  for en, zh in dict_map.items():
+                      if en in text:
+                          return f'SUMMARY:{zh}'
+                  try:
+                      res = translator.translate(text, dest='zh-tw').text
+                      return f'SUMMARY:{res}'
+                  except Exception:
+                      return f'SUMMARY:{text}'
+
+              translated = re.sub(r'SUMMARY:(.*)', replace_summary, content)
+              
+              with open('bls_zh.ics', 'w', encoding='utf-8') as f:
+                  f.write(translated)
+              print('Successfully downloaded and translated BLS calendar.')
+          except Exception as e:
+              print('Error downloading BLS calendar:', e)
+              raise e
+          "
+
+      - name: Commit and push
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add bls_zh.ics
+          git commit -m "Update translated BLS calendar" || exit 0
+          git push
