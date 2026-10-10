@@ -1750,11 +1750,11 @@ CLASS:PUBLIC
 UID:f180063c-95ba-42e0-a579-19a41250c0ee
 DTSTART;TZID=US-Eastern:20251219T100000
 DURATION:PT0M
-SUMMARY:Total Factor Productivity for Major Industries
+SUMMARY:主要產業全要素生產力
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:Total Factor Productivity for Major Industries 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:主要產業全要素生產力 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
