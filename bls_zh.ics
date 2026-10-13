@@ -22,11 +22,11 @@ CLASS:PUBLIC
 UID:946068e9-b0b9-417b-b65f-033b3065825e
 DTSTART;TZID=US-Eastern:20250107T100000
 DURATION:PT0M
-SUMMARY:Job Openings and Labor Turnover Survey
+SUMMARY:職缺和勞動力流動調查
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:Job Openings and Labor Turnover Survey 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:職缺和勞動力流動調查 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -118,11 +118,11 @@ CLASS:PUBLIC
 UID:3408a157-fb63-4567-9d8c-ba98cbb7efb8
 DTSTART;TZID=US-Eastern:20250128T100000
 DURATION:PT0M
-SUMMARY:Union Membership (Annual)
+SUMMARY:工會會員資格（每年）
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:Union Membership (Annual) 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:工會會員資格（每年） 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -142,11 +142,11 @@ CLASS:PUBLIC
 UID:88eb8cd5-a156-463e-81b4-aae42db76d2a
 DTSTART;TZID=US-Eastern:20250129T100000
 DURATION:PT0M
-SUMMARY:Quarterly Data Series on Business Employment Dynamics
+SUMMARY:企業就業動態季度數據系列
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:Quarterly Data Series on Business Employment Dynamics 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:企業就業動態季度數據系列 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -3298,11 +3298,11 @@ CLASS:PUBLIC
 UID:8eb83a59-ab8e-49ac-b204-baf341c22493
 DTSTART;TZID=US-Eastern:20260924T100000
 DURATION:PT0M
-SUMMARY:Employee Tenure
+SUMMARY:員工任期
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:Employee Tenure 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:員工任期 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
