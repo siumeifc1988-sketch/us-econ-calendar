@@ -130,11 +130,11 @@ CLASS:PUBLIC
 UID:1c0b60cb-52df-439d-867d-3aa57fb180c0
 DTSTART;TZID=US-Eastern:20250128T100000
 DURATION:PT0M
-SUMMARY:State Employment and Unemployment (Monthly)
+SUMMARY:國家就業和失業情況（月度）
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:State Employment and Unemployment (Monthly) 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:國家就業和失業情況（月度） 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -634,11 +634,11 @@ CLASS:PUBLIC
 UID:04e7d779-3297-400b-abea-1b95db4acbb3
 DTSTART;TZID=US-Eastern:20250422T100000
 DURATION:PT0M
-SUMMARY:College Enrollment and Work Activity of High School Graduates
+SUMMARY:高中畢業生升學及就業狀況
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:College Enrollment and Work Activity of High School Graduates 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:高中畢業生升學及就業狀況 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -646,11 +646,11 @@ CLASS:PUBLIC
 UID:446eb7a6-55ff-4d09-9341-c9fb782ec40e
 DTSTART;TZID=US-Eastern:20250423T100000
 DURATION:PT0M
-SUMMARY:Employment Characteristics of Families
+SUMMARY:家庭就業特徵
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:Employment Characteristics of Families 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:家庭就業特徵 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -1282,11 +1282,11 @@ CLASS:PUBLIC
 UID:8cadfb3b-6c54-42b0-9aab-2310e7cbf2d2
 DTSTART;TZID=US-Eastern:20250821T100000
 DURATION:PT0M
-SUMMARY:Summer Youth Labor Force
+SUMMARY:夏季青年勞動力
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:Summer Youth Labor Force 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:夏季青年勞動力 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -1498,11 +1498,11 @@ CLASS:PUBLIC
 UID:991ee66f-dd39-405a-b002-9c82de6c2b89
 DTSTART;TZID=US-Eastern:20250925T100000
 DURATION:PT0M
-SUMMARY:Unpaid Eldercare in the United States
+SUMMARY:美國的無償老年照護
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:Unpaid Eldercare in the United States 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:美國的無償老年照護 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -3310,11 +3310,11 @@ CLASS:PUBLIC
 UID:e96a2d2e-f128-4af1-b577-4dd148c81666
 DTSTART;TZID=US-Eastern:20260924T100000
 DURATION:PT0M
-SUMMARY:Job Flexibilities and Work Schedules
+SUMMARY:工作彈性和工作時間表
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:Job Flexibilities and Work Schedules 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:工作彈性和工作時間表 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
