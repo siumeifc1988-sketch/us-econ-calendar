@@ -1318,11 +1318,11 @@ CLASS:PUBLIC
 UID:3a4cae4a-4a60-40a5-965e-f6b72ec98c8e
 DTSTART;TZID=US-Eastern:20250828T100000
 DURATION:PT0M
-SUMMARY:細部產業的全要素生產力
+SUMMARY:Total Factor Productivity for Detailed Industries
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:細部產業的全要素生產力 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:Total Factor Productivity for Detailed Industries 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
