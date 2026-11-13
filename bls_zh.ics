@@ -10,11 +10,11 @@ CLASS:PUBLIC
 UID:f65741ec-4080-474c-b2e3-1349fe430963
 DTSTART;TZID=US-Eastern:20250103T100000
 DURATION:PT0M
-SUMMARY:大都會區就業和失業狀況（月度）
+SUMMARY:Metropolitan Area Employment and Unemployment (Monthly)
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:大都會區就業和失業狀況（月度） 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:Metropolitan Area Employment and Unemployment (Monthly) 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -118,11 +118,11 @@ CLASS:PUBLIC
 UID:3408a157-fb63-4567-9d8c-ba98cbb7efb8
 DTSTART;TZID=US-Eastern:20250128T100000
 DURATION:PT0M
-SUMMARY:Union Membership (Annual)
+SUMMARY:工會會員資格（每年）
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:Union Membership (Annual) 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:工會會員資格（每年） 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -310,11 +310,11 @@ CLASS:PUBLIC
 UID:cbf48c6f-28d6-4f70-996a-2f9c189f0cc8
 DTSTART;TZID=US-Eastern:20250305T100000
 DURATION:PT0M
-SUMMARY:County Employment and Wages Full Data Update
+SUMMARY:縣就業和工資完整數據更新
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:County Employment and Wages Full Data Update 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:縣就業和工資完整數據更新 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -946,11 +946,11 @@ CLASS:PUBLIC
 UID:fb737073-08cb-4106-8ba8-30d91e25f8b4
 DTSTART;TZID=US-Eastern:20250613T100000
 DURATION:PT0M
-SUMMARY:Employer Costs for Employee Compensation
+SUMMARY:雇主為員工支付的費用
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:Employer Costs for Employee Compensation 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:雇主為員工支付的費用 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -1378,11 +1378,11 @@ CLASS:PUBLIC
 UID:fbfaf2a0-b20e-424f-bed7-b63b9c634ffc
 DTSTART;TZID=US-Eastern:20250909T100000
 DURATION:PT0M
-SUMMARY:當前就業統計初步基準（全國）
+SUMMARY:Current Employment Statistics Preliminary Benchmark (National)
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:當前就業統計初步基準（全國） 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:Current Employment Statistics Preliminary Benchmark (National) 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -1738,11 +1738,11 @@ CLASS:PUBLIC
 UID:8a9055ef-ce3b-4248-bc39-47999a5ab678
 DTSTART;TZID=US-Eastern:20251219T100000
 DURATION:PT0M
-SUMMARY:Consumer Expenditures
+SUMMARY:消費者支出
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:Consumer Expenditures 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:消費者支出 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -1774,11 +1774,11 @@ CLASS:PUBLIC
 UID:71b2f9e7-e69d-4267-a3fd-9b399b4729a0
 DTSTART;TZID=US-Eastern:20251230T100000
 DURATION:PT0M
-SUMMARY:State Job Openings and Labor Turnover
+SUMMARY:各州職位空缺和勞動力流動率
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:State Job Openings and Labor Turnover 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:各州職位空缺和勞動力流動率 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -2494,11 +2494,11 @@ CLASS:PUBLIC
 UID:53db5e61-3255-4a38-a756-376d577f3417
 DTSTART;TZID=US-Eastern:20260505T100000
 DURATION:PT0M
-SUMMARY:1980-1984 年出生人士的勞動市場經驗、教育、伴侶狀況和健康狀況
+SUMMARY:1980-1984 年出生者的勞動市場經驗、教育、伴侶狀況和健康狀況
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:1980-1984 年出生人士的勞動市場經驗、教育、伴侶狀況和健康狀況 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:1980-1984 年出生者的勞動市場經驗、教育、伴侶狀況和健康狀況 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -2770,11 +2770,11 @@ CLASS:PUBLIC
 UID:24631833-9b0e-4ca3-a4b1-1eca72acf315
 DTSTART;TZID=US-Eastern:20260612T100000
 DURATION:PT0M
-SUMMARY:Employer Costs for Employee Compensation
+SUMMARY:雇主為員工支付的費用
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:Employer Costs for Employee Compensation 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:雇主為員工支付的費用 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -4113,8 +4113,8 @@ END:VEVENT
 BEGIN:VEVENT
 DTSTART;VALUE=DATE:20270316
 DTEND;VALUE=DATE:20270318
-SUMMARY:FOMC 利率決策會議 (含SEP/點陣圖)
-DESCRIPTION:美國聯準會（Fed）貨幣政策會議，決議基準利率。\n會議日期：2027年March 16-17*\n詳情與官方聲明：https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+SUMMARY:FOMC 利率決策會議
+DESCRIPTION:美國聯準會（Fed）貨幣政策會議，決議基準利率。\n會議日期：2027年March 16-17\n詳情與官方聲明：https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
 URL:https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
 END:VEVENT
 BEGIN:VEVENT
@@ -4127,8 +4127,8 @@ END:VEVENT
 BEGIN:VEVENT
 DTSTART;VALUE=DATE:20270608
 DTEND;VALUE=DATE:20270610
-SUMMARY:FOMC 利率決策會議 (含SEP/點陣圖)
-DESCRIPTION:美國聯準會（Fed）貨幣政策會議，決議基準利率。\n會議日期：2027年June 8-9*\n詳情與官方聲明：https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+SUMMARY:FOMC 利率決策會議
+DESCRIPTION:美國聯準會（Fed）貨幣政策會議，決議基準利率。\n會議日期：2027年June 8-9\n詳情與官方聲明：https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
 URL:https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
 END:VEVENT
 BEGIN:VEVENT
@@ -4141,8 +4141,8 @@ END:VEVENT
 BEGIN:VEVENT
 DTSTART;VALUE=DATE:20270914
 DTEND;VALUE=DATE:20270916
-SUMMARY:FOMC 利率決策會議 (含SEP/點陣圖)
-DESCRIPTION:美國聯準會（Fed）貨幣政策會議，決議基準利率。\n會議日期：2027年September 14-15*\n詳情與官方聲明：https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+SUMMARY:FOMC 利率決策會議
+DESCRIPTION:美國聯準會（Fed）貨幣政策會議，決議基準利率。\n會議日期：2027年September 14-15\n詳情與官方聲明：https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
 URL:https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
 END:VEVENT
 BEGIN:VEVENT
@@ -4153,10 +4153,10 @@ DESCRIPTION:美國聯準會（Fed）貨幣政策會議，決議基準利率。\n
 URL:https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
 END:VEVENT
 BEGIN:VEVENT
-DTSTART;VALUE=DATE:20271207
-DTEND;VALUE=DATE:20271209
-SUMMARY:FOMC 利率決策會議 (含SEP/點陣圖)
-DESCRIPTION:美國聯準會（Fed）貨幣政策會議，決議基準利率。\n會議日期：2027年December 7-8*\n詳情與官方聲明：https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+DTSTART;VALUE=DATE:20271116
+DTEND;VALUE=DATE:20271118
+SUMMARY:FOMC 利率決策會議
+DESCRIPTION:美國聯準會（Fed）貨幣政策會議，決議基準利率。\n會議日期：2027年November 16-17\n詳情與官方聲明：https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
 URL:https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
 END:VEVENT
 END:VCALENDAR
