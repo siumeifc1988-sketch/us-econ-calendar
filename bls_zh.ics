@@ -10,11 +10,11 @@ CLASS:PUBLIC
 UID:f65741ec-4080-474c-b2e3-1349fe430963
 DTSTART;TZID=US-Eastern:20250103T100000
 DURATION:PT0M
-SUMMARY:Metropolitan Area Employment and Unemployment (Monthly)
+SUMMARY:大都會區就業和失業狀況（月度）
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:Metropolitan Area Employment and Unemployment (Monthly) 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:大都會區就業和失業狀況（月度） 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -790,11 +790,11 @@ CLASS:PUBLIC
 UID:d6cb22ad-be75-479c-9ae1-55a277a2c54d
 DTSTART;TZID=US-Eastern:20250520T100000
 DURATION:PT0M
-SUMMARY:外籍出生工人的勞動力特徵
+SUMMARY:Labor Force Characteristics of Foreign-born Workers
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:外籍出生工人的勞動力特徵 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:Labor Force Characteristics of Foreign-born Workers 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -1378,11 +1378,11 @@ CLASS:PUBLIC
 UID:fbfaf2a0-b20e-424f-bed7-b63b9c634ffc
 DTSTART;TZID=US-Eastern:20250909T100000
 DURATION:PT0M
-SUMMARY:Current Employment Statistics Preliminary Benchmark (National)
+SUMMARY:當前就業統計初步基準（全國）
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:Current Employment Statistics Preliminary Benchmark (National) 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:當前就業統計初步基準（全國） 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
