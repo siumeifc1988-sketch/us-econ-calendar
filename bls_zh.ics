@@ -790,11 +790,11 @@ CLASS:PUBLIC
 UID:d6cb22ad-be75-479c-9ae1-55a277a2c54d
 DTSTART;TZID=US-Eastern:20250520T100000
 DURATION:PT0M
-SUMMARY:Labor Force Characteristics of Foreign-born Workers
+SUMMARY:外籍出生工人的勞動力特徵
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:Labor Force Characteristics of Foreign-born Workers 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:外籍出生工人的勞動力特徵 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
