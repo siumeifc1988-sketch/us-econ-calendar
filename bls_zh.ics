@@ -130,11 +130,11 @@ CLASS:PUBLIC
 UID:1c0b60cb-52df-439d-867d-3aa57fb180c0
 DTSTART;TZID=US-Eastern:20250128T100000
 DURATION:PT0M
-SUMMARY:State Employment and Unemployment (Monthly)
+SUMMARY:國家就業和失業情況（月度）
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:State Employment and Unemployment (Monthly) 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:國家就業和失業情況（月度） 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -142,11 +142,11 @@ CLASS:PUBLIC
 UID:88eb8cd5-a156-463e-81b4-aae42db76d2a
 DTSTART;TZID=US-Eastern:20250129T100000
 DURATION:PT0M
-SUMMARY:Quarterly Data Series on Business Employment Dynamics
+SUMMARY:企業就業動態季度數據系列
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:Quarterly Data Series on Business Employment Dynamics 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:企業就業動態季度數據系列 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -322,11 +322,11 @@ CLASS:PUBLIC
 UID:46aaf9a6-aa98-42af-b6ef-1facd57321d5
 DTSTART;TZID=US-Eastern:20250305T100000
 DURATION:PT0M
-SUMMARY:州失業率（年度）
+SUMMARY:State Unemployment (Annual)
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:州失業率（年度） 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:State Unemployment (Annual) 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -418,11 +418,11 @@ CLASS:PUBLIC
 UID:ca3bf7b2-60b1-4973-b08a-c79861d1bf7a
 DTSTART;TZID=US-Eastern:20250317T100000
 DURATION:PT0M
-SUMMARY:State Employment and Unemployment (Monthly)
+SUMMARY:國家就業和失業情況（月度）
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:State Employment and Unemployment (Monthly) 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:國家就業和失業情況（月度） 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -502,11 +502,11 @@ CLASS:PUBLIC
 UID:fd10ed33-734a-4c95-8026-d6060aeeb03a
 DTSTART;TZID=US-Eastern:20250401T100000
 DURATION:PT0M
-SUMMARY:職缺和勞動力流動調查
+SUMMARY:Job Openings and Labor Turnover Survey
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:職缺和勞動力流動調查 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:Job Openings and Labor Turnover Survey 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -634,11 +634,11 @@ CLASS:PUBLIC
 UID:04e7d779-3297-400b-abea-1b95db4acbb3
 DTSTART;TZID=US-Eastern:20250422T100000
 DURATION:PT0M
-SUMMARY:高中畢業生升學及就業狀況
+SUMMARY:College Enrollment and Work Activity of High School Graduates
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:高中畢業生升學及就業狀況 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:College Enrollment and Work Activity of High School Graduates 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -1294,11 +1294,11 @@ CLASS:PUBLIC
 UID:b70bd2f0-25a2-42b2-b6d6-a64f6b78c0fe
 DTSTART;TZID=US-Eastern:20250826T100000
 DURATION:PT0M
-SUMMARY:1957-1964 年出生人口的就業數量、勞動市場經驗、婚姻狀況和健康狀況
+SUMMARY:Number of Jobs, Labor Market Experience, Marital Status, and Health for those Born 1957-1964
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:1957-1964 年出生人口的就業數量、勞動市場經驗、婚姻狀況和健康狀況 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:Number of Jobs, Labor Market Experience, Marital Status, and Health for those Born 1957-1964 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -1306,11 +1306,11 @@ CLASS:PUBLIC
 UID:32c3956b-4a56-43b7-93ab-42e187ec7c69
 DTSTART;TZID=US-Eastern:20250827T100000
 DURATION:PT0M
-SUMMARY:大都會區就業和失業狀況（月度）
+SUMMARY:Metropolitan Area Employment and Unemployment (Monthly)
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:大都會區就業和失業狀況（月度） 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:Metropolitan Area Employment and Unemployment (Monthly) 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -1378,11 +1378,11 @@ CLASS:PUBLIC
 UID:fbfaf2a0-b20e-424f-bed7-b63b9c634ffc
 DTSTART;TZID=US-Eastern:20250909T100000
 DURATION:PT0M
-SUMMARY:當前就業統計初步基準（全國）
+SUMMARY:Current Employment Statistics Preliminary Benchmark (National)
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:當前就業統計初步基準（全國） 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:Current Employment Statistics Preliminary Benchmark (National) 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -1498,11 +1498,11 @@ CLASS:PUBLIC
 UID:991ee66f-dd39-405a-b002-9c82de6c2b89
 DTSTART;TZID=US-Eastern:20250925T100000
 DURATION:PT0M
-SUMMARY:美國的無償老年照護
+SUMMARY:Unpaid Eldercare in the United States
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:美國的無償老年照護 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:Unpaid Eldercare in the United States 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -1510,11 +1510,11 @@ CLASS:PUBLIC
 UID:c8d32c3d-48fc-48b4-93d7-7f405da802d5
 DTSTART;TZID=US-Eastern:20250925T100000
 DURATION:PT0M
-SUMMARY:Employee Benefits in the United States
+SUMMARY:美國的員工福利
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:Employee Benefits in the United States 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:美國的員工福利 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -1882,11 +1882,11 @@ CLASS:PUBLIC
 UID:f355199d-646b-4f5e-b883-1cb25c5b8444
 DTSTART;TZID=US-Eastern:20260116T100000
 DURATION:PT0M
-SUMMARY:美國的職業要求
+SUMMARY:Occupational Requirements in the United States
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:美國的職業要求 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:Occupational Requirements in the United States 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -1906,11 +1906,11 @@ CLASS:PUBLIC
 UID:8b7a369c-04c2-4055-b3e2-4d37373a5b9c
 DTSTART;TZID=US-Eastern:20260122T100000
 DURATION:PT0M
-SUMMARY:Work Experience of the Population (Annual)
+SUMMARY:人口工作經驗（年度）
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:Work Experience of the Population (Annual) 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:人口工作經驗（年度） 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -1918,11 +1918,11 @@ CLASS:PUBLIC
 UID:de93d67e-9ab2-45ac-a719-4e312cc28a02
 DTSTART;TZID=US-Eastern:20260122T100000
 DURATION:PT0M
-SUMMARY:Employer-Reported Workplace Injuries and Illnesses (Annual)
+SUMMARY:雇主報告的工作場所傷害和疾病（每年）
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:Employer-Reported Workplace Injuries and Illnesses (Annual) 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:雇主報告的工作場所傷害和疾病（每年） 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -2458,11 +2458,11 @@ CLASS:PUBLIC
 UID:b9e3b0cf-4a99-4f64-a09c-0119acf29a79
 DTSTART;TZID=US-Eastern:20260429T100000
 DURATION:PT0M
-SUMMARY:企業就業動態季度數據系列
+SUMMARY:Quarterly Data Series on Business Employment Dynamics
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:企業就業動態季度數據系列 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:Quarterly Data Series on Business Employment Dynamics 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -3310,11 +3310,11 @@ CLASS:PUBLIC
 UID:e96a2d2e-f128-4af1-b577-4dd148c81666
 DTSTART;TZID=US-Eastern:20260924T100000
 DURATION:PT0M
-SUMMARY:工作彈性和工作時間表
+SUMMARY:Job Flexibilities and Work Schedules
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:工作彈性和工作時間表 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:Job Flexibilities and Work Schedules 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -3730,11 +3730,11 @@ CLASS:PUBLIC
 UID:f2c792a4-6718-49f0-8591-634b81475074
 DTSTART;TZID=US-Eastern:20261218T100000
 DURATION:PT0M
-SUMMARY:Work Experience of the Population (Annual)
+SUMMARY:人口工作經驗（年度）
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:Work Experience of the Population (Annual) 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:人口工作經驗（年度） 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
