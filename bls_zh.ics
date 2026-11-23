@@ -634,11 +634,11 @@ CLASS:PUBLIC
 UID:04e7d779-3297-400b-abea-1b95db4acbb3
 DTSTART;TZID=US-Eastern:20250422T100000
 DURATION:PT0M
-SUMMARY:高中畢業生升學及就業狀況
+SUMMARY:College Enrollment and Work Activity of High School Graduates
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:高中畢業生升學及就業狀況 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:College Enrollment and Work Activity of High School Graduates 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
