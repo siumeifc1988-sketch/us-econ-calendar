@@ -298,11 +298,11 @@ CLASS:PUBLIC
 UID:6ecb93b7-9273-4c94-b8db-c979b32f8933
 DTSTART;TZID=US-Eastern:20250225T100000
 DURATION:PT0M
-SUMMARY:殘障人士：勞動力特徵
+SUMMARY:People with a Disability: Labor Force Characteristics
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:殘障人士：勞動力特徵 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:People with a Disability: Labor Force Characteristics 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -634,11 +634,11 @@ CLASS:PUBLIC
 UID:04e7d779-3297-400b-abea-1b95db4acbb3
 DTSTART;TZID=US-Eastern:20250422T100000
 DURATION:PT0M
-SUMMARY:College Enrollment and Work Activity of High School Graduates
+SUMMARY:高中畢業生升學及就業狀況
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:College Enrollment and Work Activity of High School Graduates 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:高中畢業生升學及就業狀況 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -1282,11 +1282,11 @@ CLASS:PUBLIC
 UID:8cadfb3b-6c54-42b0-9aab-2310e7cbf2d2
 DTSTART;TZID=US-Eastern:20250821T100000
 DURATION:PT0M
-SUMMARY:夏季青年勞動力
+SUMMARY:Summer Youth Labor Force
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:夏季青年勞動力 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:Summer Youth Labor Force 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -1402,11 +1402,11 @@ CLASS:PUBLIC
 UID:5426b7b8-821e-4232-95ea-103befb6a25a
 DTSTART;TZID=US-Eastern:20250909T100000
 DURATION:PT0M
-SUMMARY:當前就業統計初步基準（州和地區）
+SUMMARY:Current Employment Statistics Preliminary Benchmark (State and Area)
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:當前就業統計初步基準（州和地區） 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:Current Employment Statistics Preliminary Benchmark (State and Area) 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -3310,11 +3310,11 @@ CLASS:PUBLIC
 UID:e96a2d2e-f128-4af1-b577-4dd148c81666
 DTSTART;TZID=US-Eastern:20260924T100000
 DURATION:PT0M
-SUMMARY:工作彈性和工作時間表
+SUMMARY:Job Flexibilities and Work Schedules
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:工作彈性和工作時間表 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:Job Flexibilities and Work Schedules 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
