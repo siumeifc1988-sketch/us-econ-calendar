@@ -106,11 +106,11 @@ CLASS:PUBLIC
 UID:2dda8646-0a84-4345-8809-64fac415aae5
 DTSTART;TZID=US-Eastern:20250122T100000
 DURATION:PT0M
-SUMMARY:Usual Weekly Earnings of Wage and Salary Workers
+SUMMARY:工資和薪金工人通常的每週收入
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:Usual Weekly Earnings of Wage and Salary Workers 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:工資和薪金工人通常的每週收入 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -1318,11 +1318,11 @@ CLASS:PUBLIC
 UID:3a4cae4a-4a60-40a5-965e-f6b72ec98c8e
 DTSTART;TZID=US-Eastern:20250828T100000
 DURATION:PT0M
-SUMMARY:Total Factor Productivity for Detailed Industries
+SUMMARY:細部產業的全要素生產力
 LOCATION:Washington\, DC
 TRANSP:TRANSPARENT
 CATEGORIES:IMPORTANT, BLS
-DESCRIPTION:Total Factor Productivity for Detailed Industries 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
+DESCRIPTION:細部產業的全要素生產力 數據發佈。\n官方網址：https://www.bls.gov/schedule/news_release/
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
